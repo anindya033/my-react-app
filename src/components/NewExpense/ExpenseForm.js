@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import "./ExpenseForm.css";
 
-const ExpenseForm = () => {
+const ExpenseForm = (props) => {
   //Working with multiple state
   const [enteredTitle, setEnteredTitle] = useState("");
   const [enteredAmount, setEnteredAmount] = useState("");
@@ -60,6 +60,10 @@ const ExpenseForm = () => {
           date : new Date(enteredDate)
       }
       console.log(expenseData);
+      //passing data : Child to Parent ; to NewExpense.js
+      props.onSaveExpenseData(expenseData);
+
+
       //Clearing the state value for two way binding
       setEnteredAmount('');
       setEnteredTitle('');
