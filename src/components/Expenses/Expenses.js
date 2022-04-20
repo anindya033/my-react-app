@@ -6,19 +6,28 @@ import "./Expenses.css";
 import ExpensesFilter from "./ExpensesFilter";
 
 const Expenses = (props) => {
-    
-    const [filteredYear,setFilteredYear] = useState("2020");
-    const onFilterChangeHandler = (data)=>{
-        console.log("From Expense .js");
-        console.log(data);
-        setFilteredYear(data);
-    }
+  const [filteredYear, setFilteredYear] = useState("2020");
+  const onFilterChangeHandler = (data) => {
+    console.log("From Expense .js");
+    console.log(data);
+    setFilteredYear(data);
+  };
   return (
     <Card className="expenses">
-      <ExpensesFilter 
-      defaultYearValue={filteredYear}
-      onFilterChangeData={onFilterChangeHandler} />
-      <ExpenseItem
+        
+      <ExpensesFilter
+        defaultYearValue={filteredYear}
+        onFilterChangeData={onFilterChangeHandler}
+      />
+
+      {props.items.map((expense) => (
+        <ExpenseItem
+          title={expense.title}
+          amount={expense.amount}
+          date={expense.date}
+        />
+      ))}
+      {/* <ExpenseItem
         title={props.items[0].title}
         amount={props.items[0].amount}
         date={props.items[0].date}
@@ -37,7 +46,7 @@ const Expenses = (props) => {
         title={props.items[3].title}
         amount={props.items[3].amount}
         date={props.items[3].date}
-      />
+      /> */}
     </Card>
   );
 };
