@@ -5,7 +5,7 @@ const Card = (props) =>{
 
     return(
         <div
-            className={classes.card}
+            className={`${props.cssClass} ${classes.card}`}
         >
             {props.children}
         </div>
