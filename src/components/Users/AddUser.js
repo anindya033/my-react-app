@@ -43,9 +43,9 @@ const AddUser = (props) => {
     <Card cssClass={classes.input}>
       <form onSubmit={addUserHandler}>
         <label htmlFor="username">User Name</label>
-        <input type={Text} onChange={userNameChangeHandler} id="username" />
+        <input type="text" onChange={userNameChangeHandler} id="username" />
         <label htmlFor="age">age</label>
-        <input type={Number} onChange={userAgeChangeHandler} id="age" />
+        <input type="number" onChange={userAgeChangeHandler} id="age" />
         <Button type="submit">Add User</Button>
       </form>
     </Card>
