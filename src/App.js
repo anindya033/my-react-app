@@ -11,9 +11,9 @@ function App() {
     //     });
     //     console.log (enteredUserList);
     // }
-    const adduserHandler = (uName, uAge) =>{
+    const adduserHandler = (data) =>{
         setUserList((prevList) =>{
-            return [...prevList, {name : uName, age : uAge}]
+            return [...prevList, data]
         })
     }
   return (

@@ -9,11 +9,11 @@ const UsersList = (props) => {
     <Card
     cssClass = {classes.users}>
       <ul>
-        {props.users.map((user) => {
-          <li>
+        {props.users.map((user) => (
+          <li key={user.key}>
             {user.name} ({user.age} years old)
-          </li>;
-        })}
+          </li>
+        ))}
       </ul>
     </Card>
   );
