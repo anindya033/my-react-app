@@ -1,55 +1,59 @@
 import React, { useState } from "react";
 import Button from "../UI/Button";
 import Card from "../UI/Card";
+import ErrorModal from "../UI/ErrorModal";
 import classes from "./AddUser.module.css";
 
 const AddUser = (props) => {
-  const [entereduserName, setEnteredUserName] = useState("");
-  const [entereduserAge, setEntereduserAge] = useState("");
+    const [entereduserName, setEnteredUserName] = useState("");
+    const [entereduserAge, setEntereduserAge] = useState("");
 
-  const addUserHandler = (event) => {
-    event.preventDefault();
+    const addUserHandler = (event) => {
+        event.preventDefault();
 
-    if (
-      entereduserName.trim().length === 0 ||
-      entereduserAge.trim().length === 0
-    ) {
-      return false;
-    }
+        if (
+            entereduserName.trim().length === 0 ||
+            entereduserAge.trim().length === 0
+        ) {
+            return false;
+        }
 
-    if (+entereduserAge < 1) {
-      return false;
-    }
-    let inputObj = new Object();
-    inputObj = {
-        key : new Date().getTime(),
-        name : entereduserName,
-        age : entereduserAge
-    }
-    props.onAddUser(inputObj);
-    setEnteredUserName('');
-    setEntereduserAge('');
-  };
+        if (+entereduserAge < 1) {
+            return false;
+        }
+        let inputObj = new Object();
+        inputObj = {
+            key: new Date().getTime(),
+            name: entereduserName,
+            age: entereduserAge
+        }
+        props.onAddUser(inputObj);
+        setEnteredUserName('');
+        setEntereduserAge('');
+    };
 
-  const userNameChangeHandler = (event) => {
-    setEnteredUserName(event.target.value);
-  };
+    const userNameChangeHandler = (event) => {
+        setEnteredUserName(event.target.value);
+    };
 
-  const userAgeChangeHandler = (event) => {
-    setEntereduserAge(event.target.value);
-  };
+    const userAgeChangeHandler = (event) => {
+        setEntereduserAge(event.target.value);
+    };
 
-  return (
-    <Card cssClass={classes.input}>
-      <form onSubmit={addUserHandler}>
-        <label htmlFor="username">User Name</label>
-        <input type="text" onChange={userNameChangeHandler} id="username" />
-        <label htmlFor="age">age</label>
-        <input type="number" onChange={userAgeChangeHandler} id="age" />
-        <Button type="submit">Add User</Button>
-      </form>
-    </Card>
-  );
+    return (
+        <div>
+            <ErrorModal title="An error occured!" message="Something went wrong!" />
+            <Card cssClass={classes.input}>
+                <form onSubmit={addUserHandler}>
+                    <label htmlFor="username">User Name</label>
+                    <input type="text" onChange={userNameChangeHandler} id="username" />
+                    <label htmlFor="age">age</label>
+                    <input type="number" onChange={userAgeChangeHandler} id="age" />
+                    <Button type="submit">Add User</Button>
+                </form>
+            </Card>
+        </div>
+    );
 };
 
 export default AddUser;
