@@ -1,25 +1,29 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import AddUser from "./components/Users/AddUser";
-import UsersList from "./components/Users/UsersList";
+import Login from './components/Login/Login';
+import Home from './components/Home/Home';
+import MainHeader from './components/MainHeader/MainHeader';
+
 function App() {
-    const [enteredUserList, setUserList] =  useState([]);
-    // const adduserHandler = (data)=>{
-    //     console.log (data);
-    //     setUserList =((prevUserList) =>{
-    //         return [...prevUserList, {name :data.name, age : data.age }];
-    //     });
-    //     console.log (enteredUserList);
-    // }
-    const adduserHandler = (data) =>{
-        setUserList((prevList) =>{
-            return [...prevList, data]
-        })
-    }
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const loginHandler = (email, password) => {
+    // We should of course check email and password
+    // But it's just a dummy/ demo anyways
+    setIsLoggedIn(true);
+  };
+
+  const logoutHandler = () => {
+    setIsLoggedIn(false);
+  };
+
   return (
     <React.Fragment>
-      <AddUser onAddUser={adduserHandler}></AddUser>
-      <UsersList users={enteredUserList}></UsersList>
+      <MainHeader isAuthenticated={isLoggedIn} onLogout={logoutHandler} />
+      <main>
+        {!isLoggedIn && <Login onLogin={loginHandler} />}
+        {isLoggedIn && <Home onLogout={logoutHandler} />}
+      </main>
     </React.Fragment>
   );
 }
