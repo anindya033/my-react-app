@@ -11,11 +11,20 @@ const Login = (props) => {
   const [passwordIsValid, setPasswordIsValid] = useState();
   const [formIsValid, setFormIsValid] = useState(false);
 
-  useEffect(()=>{
-    setFormIsValid(
+  useEffect(() => {
+    const identifier = setTimeout(() => {
+      console.log('Checking form validity!');
+      setFormIsValid(
         enteredEmail.includes('@') && enteredPassword.trim().length > 6
       );
-  },[enteredEmail,enteredPassword]);
+    }, 500);
+
+    return () => { 
+        // this is called clearning up the useEffect; only run after sometime
+      console.log('CLEANUP');
+      clearTimeout(identifier);
+    };
+  }, [enteredEmail, enteredPassword]);
 
 
 
