@@ -64,11 +64,14 @@ const Login = (props) => {
         }
     );
 
+    const { isValid : emailIsValid} = emailState;
+    const { isValid : passwordlIsValid} = passwordState;
+
     useEffect(() => {
         const identifier = setTimeout(() => {
             console.log('Checking form validity!');
             setFormIsValid(
-                emailState.isValid && passwordState.isValid
+                emailIsValid && passwordlIsValid
             );
         }, 500);
 
@@ -77,7 +80,7 @@ const Login = (props) => {
             console.log('CLEANUP');
             clearTimeout(identifier);
         };
-    }, [emailState, passwordState]);
+    }, [emailIsValid, passwordlIsValid]);
 
 
 
