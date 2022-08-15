@@ -4,8 +4,8 @@ import classes from './Header.module.css';
 import HeaderCartButton from "./HeaderCartButton";
 const Header = (props) => {
 
-    const onAddCardHandler=()=>{
-        alert(1);
+    const onAddCartHandler=()=>{
+        props.onShowCart (true);
     }
     return (
         <React.Fragment>
@@ -13,7 +13,7 @@ const Header = (props) => {
                 <h1>Order your meals</h1>
                 <HeaderCartButton 
                 title="Cart" 
-                onClick = {onAddCardHandler}
+                onClick = {onAddCartHandler}
                 ></HeaderCartButton>
             </header>
             <div>
