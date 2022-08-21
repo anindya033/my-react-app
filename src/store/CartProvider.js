@@ -10,25 +10,45 @@ const cartReducer = (state, action) => {
     if (action.type === 'ADD') {
         const updatedTotalAmount = state.totalAmount + (action.item.price * action.item.amount);
         // getting the index for the items
-        const indexOfExisitngItem = state.items.findIndex(item=> item.id === action.item.id); 
+        const indexOfExisitngItem = state.items.findIndex(item => item.id === action.item.id);
         // getting the items from the exisitng item
         const exisitngCartItem = state.items[indexOfExisitngItem];
-        let updatedItems =[];
+        let updatedItems = [];
 
-        if(exisitngCartItem){
+        if (exisitngCartItem) {
             let updatedItem = {};
             updatedItem = {
                 ...exisitngCartItem,
-                amount : exisitngCartItem.amount +1
+                amount: exisitngCartItem.amount + 1
             }
             updatedItems = [...state.items]; // Copied the existing items intp an array
             updatedItems[indexOfExisitngItem] = updatedItem; // Picked the old idex item and replaced
-        }else{
+        } else {
             updatedItems = state.items.concat(action.item);
         }
 
 
-        
+
+        return {
+            items: updatedItems,
+            totalAmount: updatedTotalAmount
+        };
+    }
+    if (action.type === 'REMOVE') {
+        const existingCartItemIndex = state.items.findIndex(
+            (item) => item.id === action.id
+        );
+        const existingItem = state.items[existingCartItemIndex];
+        const updatedTotalAmount = state.totalAmount - existingItem.price;
+        let updatedItems;
+        if (existingItem.amount === 1) {
+            updatedItems = state.items.filter(item => item.id !== action.id);
+        } else {
+            const updatedItem = { ...existingItem, amount: existingItem.amount - 1 };
+            updatedItems = [...state.items];
+            updatedItems[existingCartItemIndex] = updatedItem;
+        }
+
         return {
             items: updatedItems,
             totalAmount: updatedTotalAmount
