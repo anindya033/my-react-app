@@ -38,15 +38,6 @@ class Users extends Component{
             showUsers : true
         }
     }
-
-    usersList = (
-        <ul>
-          {this.props.users.map((user) => (
-            <User key={user.id} name={user.name} />
-          ))}
-        </ul>
-      );
-
     toggleUsersHandler() {
         this.setState((
             (currState)=>{
@@ -58,14 +49,20 @@ class Users extends Component{
     }
 
     render(){
-
+        const usersList = (
+            <ul>
+              {this.props.users.map((user) => (
+                <User key={user.id} name={user.name} />
+              ))}
+            </ul>
+          );
         
         return (
             <div className={classes.users}>
               <button onClick={this.toggleUsersHandler.bind(this)}>
                 {this.state.showUsers ? 'Hide' : 'Show'} Users
               </button>
-              {this.state.showUsers && this.usersList}
+              {this.state.showUsers && usersList}
             </div>
           );
     }
